@@ -2,6 +2,8 @@
   <div id="app">
     <h1>Планировщик задач</h1>
     <hr>
+    <AddItem />
+    <hr>
     <TodoList
       v-bind:todos="todos"
       v-on:remove-item="removeItem"
@@ -11,6 +13,7 @@
 
 <script>
 import TodoList from '@/components/TodoList'
+import AddItem from '@/components/AddItem'
 export default {
   name: 'App',
   data() {
@@ -28,7 +31,7 @@ export default {
     }
   },
   components: {
-    TodoList
+    TodoList, AddItem
   }
 }
 </script>
