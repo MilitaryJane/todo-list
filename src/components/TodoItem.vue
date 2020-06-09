@@ -2,7 +2,7 @@
 	<li>
 		<span v-bind:class="{done: item.completed}">
 			<input type="checkbox" v-on:change="isComplete">
-			<strong>{{ item.id }}</strong>
+			<strong>{{ index + 1 }}</strong>
 			{{ item.text }}
 		</span>
 		<button class="remove" 
@@ -18,11 +18,12 @@ export default {
 		item: {
 			type: Object,
 			required: true
-		}
+		},
+		index: Number
 	},
 	methods: {
 		isComplete() {
-			this.item.completed = !this.item.completed
+			this.item.completed = !this.item.completed;
 		}
 	}
 }

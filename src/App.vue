@@ -2,7 +2,8 @@
   <div id="app">
     <h1>Планировщик задач</h1>
     <hr>
-    <AddItem />
+    <AddItem v-on:add-item="addItem"
+     />
     <hr>
     <TodoList
       v-bind:todos="todos"
@@ -27,7 +28,10 @@ export default {
   },
   methods: {
     removeItem(id) {
-      this.todos = this.todos.filter(t => t.id !== id)
+      this.todos = this.todos.filter(t => t.id !== id);
+    },
+    addItem(item) {
+      this.todos.push(item);
     }
   },
   components: {
