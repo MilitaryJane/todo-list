@@ -3,24 +3,29 @@
 		<span v-bind:class="{done: item.completed}">
 			<input type="checkbox" v-on:change="isComplete">
 			<strong>{{ index + 1 }}</strong>
-			{{ item.text }}
+			{{ item.text | uppercase }}
 		</span>
-		<button class="remove" 
-						v-on:click="$emit ('remove-item', item.id)"				
+		<button class="remove"
+						v-on:click="$emit ('remove-item', item.id)"
 		>&times;</button>
 	</li>
 </template>
 
 <script>
 export default {
-	// в props валидируем входящие параметры: 
+	// в props валидируем входящие параметры:
 	props: {
 		item: {
 			type: Object,
 			required: true
 		},
 		index: Number
-	},
+  },
+  filters: {
+    uppercase(value){
+      return value.toUpperCase()
+    }
+  },
 	methods: {
 		isComplete() {
 			this.item.completed = !this.item.completed;
