@@ -3,7 +3,15 @@
 		<span v-bind:class="{done: item.completed}">
 			<input type="checkbox" v-on:change="isComplete">
 			<strong>{{ index + 1 }}</strong>
-			{{ item.text | uppercase }}
+			<span v-if="showEdit"
+            v-on:dblclick="toggleShow">
+            {{ item.text | uppercase }}
+      </span>
+      <input class = "edit" type="text"
+            v-else
+            v-model="item.text"
+            v-on:contextmenu.prevent ="toggleShow"
+            v-on:keyup.enter="toggleShow">
 		</span>
 		<button class="remove"
 						v-on:click="$emit ('remove-item', item.id)"
@@ -13,6 +21,11 @@
 
 <script>
 export default {
+	data() {
+		return {
+      showEdit: true
+    }
+	},
 	// в props валидируем входящие параметры:
 	props: {
 		item: {
@@ -29,7 +42,10 @@ export default {
 	methods: {
 		isComplete() {
 			this.item.completed = !this.item.completed;
-		}
+    },
+    toggleShow() {
+      this.showEdit = !this.showEdit;
+    }
 	}
 }
 </script>
@@ -57,5 +73,9 @@ export default {
 	input {
 		margin-right: 1rem;
 	}
+
+  .edit {
+    width: 400px;
+  }
 
 </style>
